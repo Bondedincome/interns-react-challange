@@ -1,0 +1,44 @@
+.actor-card {
+  border-radius: 20px;
+  margin: 10px;
+  width: 250px;
+  height: 300px;
+  background-color: #282c35;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+.actor-card:hover {
+  background-color: #282c34;
+  color: white;
+  box-shadow: 0 8px 16px rgba(75, 117, 150, 0.6); 
+  transform: scale(1.05); 
+}
+
+.actor-card h2 {
+  margin-top: 0;
+  margin-bottom: 50px;
+  color: white;
+  background-color: #4b7596;
+  border-top-left-radius: 20px;border-top-right-radius: 20px ;
+  font-size: x-large;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  font-family: 'TW cen MT';
+  text-transform: uppercase;
+}
+
+.button {
+  margin-top: 60px;
+  border-radius: 5px;
+  background-color: #282c35;
+  border: none;
+  color: #4b7596;
+  font-style: italic;
+  text-decoration: underline;
+}
+
+.actor-card font{
+  font-size: 20px;
+  color:#999999;
+}
+
