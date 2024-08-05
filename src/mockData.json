@@ -1,0 +1,17 @@
+{
+    "results": [
+      {
+        "name": "Luke Skywalker",
+        "height": "172",
+        "birth_year": "19BBY",
+        "gender": "male"
+      },
+      {
+        "name": "Darth Vader",
+        "height": "202",
+        "birth_year": "41.9BBY",
+        "gender": "male"
+      }
+    ]
+  }
+  

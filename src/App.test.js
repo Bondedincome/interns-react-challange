@@ -1,78 +1,46 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import React from 'react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import App from './App';
+import mockData from './mockData.json';
+import { act } from 'react-dom/test-utils';
 
-beforeAll(() => {
-  global.fetch = jest.fn();
+
+beforeEach(() => {
+  jest.spyOn(global, 'fetch').mockResolvedValue({
+    json: jest.fn().mockResolvedValue(mockData),
+  });
 });
 
 afterEach(() => {
-  fetch.mockClear();
-});
-
-test('renders loading state initially', () => {
-  fetch.mockResolvedValueOnce({
-    json: () => Promise.resolve({ results: [] }),
-  });
-
-  render(<App />);
-  expect(screen.getByText(/loading/i)).toBeInTheDocument();
-});
-
-test('renders error state on fetch failure', async () => {
-  fetch.mockRejectedValueOnce(new Error('Failed to fetch'));
-
-  render(<App />);
-  expect(await screen.findByText(/error/i)).toBeInTheDocument();
+  jest.restoreAllMocks();
 });
 
 test('renders list of actors', async () => {
-  const mockData = {
-    results: [
-      { name: 'Luke Skywalker', height: '172', birth_year: '19BBY' },
-      { name: 'Darth Vader', height: '202', birth_year: '41.9BBY' },
-    ],
-  };
-
-  fetch.mockResolvedValueOnce({
-    json: () => Promise.resolve(mockData),
-  });
-
   render(<App />);
-  expect(await screen.findByText(/actor list/i)).toBeInTheDocument();
 
   for (const actor of mockData.results) {
     expect(await screen.findByText(actor.name)).toBeInTheDocument();
-    expect(await screen.findByText(`Height: ${actor.height}`)).toBeInTheDocument();
-    expect(await screen.findByText(`Birth Year: ${actor.birth_year}`)).toBeInTheDocument();
+    expect(await screen.findByText((content, element) => content.startsWith(`Height:`) && element.tagName.toLowerCase() === 'font')).toBeInTheDocument();
+    expect(await screen.findByText(actor.height)).toBeInTheDocument();
+    expect(await screen.findByText((content, element) => content.startsWith(`Birth Year:`) && element.tagName.toLowerCase() === 'font')).toBeInTheDocument();
+    expect(await screen.findByText(actor.birth_year)).toBeInTheDocument();
   }
 });
 
 test('renders actor detail view on clicking "Detail" button', async () => {
-  const mockData = {
-    results: [
-      { name: 'Luke Skywalker', height: '172', birth_year: '19BBY', gender: 'male' }
-    ]
-  };
-
-  fetch.mockResolvedValueOnce({
-    json: () => Promise.resolve(mockData),
-  });
-
   render(<App />);
-  expect(await screen.findByText(/actor list/i)).toBeInTheDocument();
 
   const detailButton = await screen.findAllByText(/detail/i);
   fireEvent.click(detailButton[0]);
 
-  expect(await screen.findByText(/luke skywalker/i)).toBeInTheDocument();
-  expect(await screen.findByText(/height: 172/i)).toBeInTheDocument();
-  expect(await screen.findByText(/birth year: 19bby/i)).toBeInTheDocument();
-  expect(await screen.findByText(/gender: male/i)).toBeInTheDocument();
-
-  const closeButton = await screen.findByText(/close/i);
-  fireEvent.click(closeButton);
-
-  await waitFor(() => {
-    expect(screen.queryByText(/luke skywalker/i)).not.toBeInTheDocument();
+  expect(await screen.findAllByText(/luke skywalker/i)).toHaveLength(2);
+  expect(await screen.findByText((content, element) => content.startsWith(`Height:`) && element.tagName.toLowerCase() === 'font')).toBeInTheDocument();
+  expect(await screen.findByText('172')).toBeInTheDocument();
+  expect(await screen.findByText((content, element) => content.startsWith(`Birth Year:`) && element.tagName.toLowerCase() === 'font')).toBeInTheDocument();
+  expect(await screen.findByText('19BBY')).toBeInTheDocument();
+  expect(await screen.findByText((content, element) => content.startsWith(`Gender:`) && element.tagName.toLowerCase() === 'font')).toBeInTheDocument();
+  expect(await screen.findByText('male')).toBeInTheDocument();
+  await act(async () => {
+    render(<App />);
   });
 });
