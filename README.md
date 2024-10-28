@@ -1,19 +1,89 @@
-Contains React.Js code challenge for internship applicants to Mereb Technologies. Please carefully follow the instructions given below.
+# React.js Code Internship Challenge Submission for Mereb Technologies
 
-**Create Simple React.Js application**
+Hello! This is my submission for Mereb Technologies recent Internship chalenge. I've put in a description of how i built it, how it works and how it runs on a local machine.
 
-Your task is to create react.js application and fetch a list of actors with the films they have been involved from a given API endpoint and render the list of actors on the page. Each actor should be displayed as a card with its name, height,birth_year and an "Detail" button.
+## Overview
 
-**Details:**
+This project is a simple React.js application that fetches a list of actors from an API and displays them as individual cards. Each card includes the actor's name, height, birth year, and a "Detail" button. When the button is clicked, more information about the actor is displayed in a separate component.
 
-1. Fetch the product data from the following API endpoint: https://swapi.py4e.com/api/people/.
+## Features
 
-2. Display the list of actors as cards. Each card should include the product name, height,birth_year and an "Detail" button.
+### 1. Fetching Actors from API
 
-3. When the "Detail" button is clicked, the selected actor should be displayed in separated component with the detail of an actor.
+The application fetches data from the following API:
 
-4. Use appropriate CSS styles to make the actor list visually appealing.
+* API Endpoint: <https://swapi.py4e.com/api/people/>
 
-5. Errors and loading states should be handled.
-6. Write unit tests to ensure that the components behave as expected.
-   
+### 2. Actor Cards
+
+The fetched actors are displayed on the page as individual cards. Each card contains:
+
+* Name: The actor’s name.
+* Height: The actor’s height.
+* Birth Year: The actor’s birth year.
+* "Detail" Button: A button to view more details about the actor.
+
+### 3. Actor Details Component
+
+When a user clicks the "Detail" button, a new component renders the selected actor’s details. This allows users to focus on one actor’s specific information.
+
+### 4. Unit Tests
+
+To ensure the app works as expected, I’ve written unit tests using Jest and React Testing Library. The tests cover:
+
+* Rendering of actor cards.
+* Functionality of the "Detail" button.
+* Proper handling of loading and error states.
+
+## How to Run the Project
+
+To run the project locally, follow these steps:
+
+### 1. Clone the Repository
+
+First, clone the repository to your local machine:
+
+```bash
+git clone https://github.com/Bondedincome/interns-react-challange
+cd interns-react-challange
+```
+
+### 2. Install Dependencies
+
+Next, install all necessary dependencies:
+
+```bash
+npm install
+```
+
+### 3. Run the Application
+
+Once the dependencies are installed, you can start the development server:
+
+```bash
+npm start
+```
+
+This will launch the app in your default browser at <http://localhost:3000.>
+
+### 4. Run Unit Tests
+
+To run the unit tests, use the following command:
+
+```bash
+npm test
+```
+
+## Conculusion
+
+Thank you for the opportunity to take on this challenge! It was a great learning experience, and I hope this solution meets your expectations. Please feel free to reach out if you have any questions or feedback on the project.
+
+## Contact
+
+**Phone Number**: +251969393959
+
+**Email**: `daniotmw10@gmail.com`
+
+**LinkedIn**: Daniot Woldetinsae
+
+**Instagram**: @daniot9
